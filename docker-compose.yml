@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+  solr:
+    image: solr:6
+    container_name: demo_solr
+    volumes:
+#      - ./solr-data:/opt/solr/server/solr/mycores/testcore
+      - ./private/solr:/meteor-solr-config
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - testcore
+      - /meteor-solr-config
+    ports:
+      - "8983:8983"
+    networks:
+      - demo_net
+
+networks:
+  demo_net:
+
+
+
